@@ -25,17 +25,33 @@ def profile(nickname):
     user = db.get_user_by_nickname(nickname)
     current_user = {
         'nickname': session.get('nickname', 'guest'),
-        'id': session.get('user_id', None)
+        'id': session.get('user_id', None),
+        'username': session.get('username', 'guest')
     }
+    
+    # Добавляем данные для отображения в профиле
+    streak = session.get('streak', 0)
+    crystals = session.get('crystals', 0)
+    friends_count = 0  # Позже добавим подсчет из базы данных
+    
     if nickname == 'guest':
-        return render_template('profile.html', 
-                             user={'nickname': 'guest', 'balance': 0}, 
-                             inventory=[], 
+        return render_template('profile.html',
+                             user=current_user,
+                             streak=streak,
+                             crystals=crystals,
+                             friends_count=friends_count,
                              current_user=current_user)
+    
     if not user:
         return redirect('/')
-    inventory = db.get_user_inventory(user['id'])
-    return render_template('profile.html', user=user, inventory=inventory, current_user=current_user)
+        
+    return render_template('profile.html',
+                         user=user,
+                         streak=streak,
+                         crystals=crystals,
+                         friends_count=friends_count,
+                         current_user=current_user)
+
 
 @app.route('/inventory')
 def inventory():

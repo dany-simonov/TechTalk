@@ -1,46 +1,48 @@
 {% extends "base.html" %}
 
+{% block title %}Профиль - {{ user.nickname }}{% endblock %}
+
 {% block content %}
 <div class="profile-container">
-    <div class="profile-header">
-        <div class="profile-picture">
-            <img src="{{ url_for('static', filename='uploads/' + user.profile_picture) if user.profile_picture else url_for('static', filename='images/default_avatar.png') }}" alt="Фото профиля">
-            {% if session.user_id == user.id %}
-            <form id="picture-form" class="picture-upload">
-                <input type="file" name="picture" accept="image/jpeg,image/png">
-                <button type="submit">Обновить фото</button>
-            </form>
-            {% endif %}
+    <div class="profile-content">
+        <div class="avatar-section">
+            <img src="{{ url_for('static', filename='images/dino.jpg') }}" alt="Avatar" class="profile-avatar" id="avatar-preview">
+            <div class="avatar-controls">
+                <input type="file" id="avatar-input" accept="image/*" class="btn btn-green">
+                <button class="btn btn-green">Обновить фото</button>
+            </div>
         </div>
-        
-        <div class="profile-info">
-            <h2>{{ user.nickname }}</h2>
+
+        <div class="user-info">
+            <div class="credentials">
+                <p>Логин: {{ user.username }}</p>
+                <p>Пароль: ********</p>
+            </div>
+
+            <div class="nickname-section">
+                <input type="text" placeholder="@nickname" value="{{ user.nickname }}">
+                <button class="btn btn-green">Сохранить</button>
+            </div>
+
             <div class="stats">
                 <div class="stat-item">
-                    <span class="crystal">💎</span>
-                    <span>{{ user.balance }}</span>
+                    <span class="fire">🔥</span>
+                    <span>{{ streak }} дней вы в ударе</span>
                 </div>
                 <div class="stat-item">
-                    <span class="friends">👥</span>
-                    <span>{{ friends|length }}</span>
+                    <span class="crystal">💎</span>
+                    <span>{{ crystals }}</span>
+                </div>
+                <div class="friends-section">
+                    <div class="friends-count">
+                        <span>👥 {{ friends_count }} друзей</span>
+                    </div>
+                    <div class="add-friend">
+                        <input type="text" placeholder="Никнейм друга">
+                        <button class="btn btn-green">Найти друга</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="inventory-section">
-        <h3>Инвентарь</h3>
-        <div class="inventory-grid">
-            {% for item in inventory %}
-            <div class="inventory-item">
-                <img src="{{ url_for('static', filename='images/items/' + item.icon) }}" alt="{{ item.name }}">
-                <h4>{{ item.name }}</h4>
-                <p>{{ item.description }}</p>
-                {% if item.type == 'usable' %}
-                <button class="use-item-btn" data-item-id="{{ item.id }}">Использовать</button>
-                {% endif %}
-            </div>
-            {% endfor %}
         </div>
     </div>
 </div>
