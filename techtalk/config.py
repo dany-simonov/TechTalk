@@ -1,5 +1,5 @@
 class Config:
-    SECRET_KEY = 'your-secret-key-here'
+    SECRET_KEY = '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'
     GAME_WORD_LENGTH = 5
     MAX_ATTEMPTS = 6
     LANGUAGES = ['en', 'ru']

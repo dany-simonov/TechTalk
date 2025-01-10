@@ -4,23 +4,28 @@ from config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.config['SECRET_KEY'] = '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'
 db = Database()
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/game/<lang>')
-def game(lang):
+@app.route('/game')
+def game():
+    lang = request.args.get('lang', 'ru')
     if lang not in app.config['LANGUAGES']:
         return redirect('/')
+    
     session['language'] = lang
     session['attempts'] = 0
     word_pair = db.get_random_word(lang, app.config['GAME_WORD_LENGTH'])
+    
     if not word_pair:
         return redirect('/')
+        
     session['word'] = word_pair[0].upper()
-    return render_template('game.html')
+    return render_template('game.html', lang=lang)
 
 @app.route('/check', methods=['POST'])
 def check_word():
@@ -58,6 +63,10 @@ def new_game():
     session['attempts'] = 0
     
     return jsonify({'success': True})
+
+@app.route('/store')
+def store():
+    return render_template('store.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

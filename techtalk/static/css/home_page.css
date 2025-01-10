@@ -1,0 +1,252 @@
+:root {
+    --correct-color: #008819;
+    --present-color: #CCAD00;
+    --light-gray: #f5f5f5;
+    --gray-text: #787c7e;
+    --dark-bg: #121213;
+    --dark-card: #1a1a1b;
+}
+
+[data-theme="light"] {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --card-bg: var(--light-gray);
+    --button-color: var(--correct-color);
+    --footer-bg: #ffffff;
+    --info-text: var(--gray-text);
+}
+
+[data-theme="dark"] {
+    --background-color: var(--dark-bg);
+    --text-color: #ffffff;
+    --card-bg: var(--dark-card);
+    --button-color: var(--correct-color);
+    --footer-bg: var(--dark-bg);
+    --info-text: var(--gray-text);
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.header {
+    background-color: var(--background-color);
+    padding: 1rem;
+    border-bottom: 1px solid var(--card-bg);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    height: 40px;
+}
+
+.user-stats {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.streak, .crystals {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.fire, .crystal {
+    font-size: 1.3rem;
+}
+
+.crystal {
+    color: #00b4ff;
+}
+
+.shop-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.theme-switcher {
+    display: flex;
+    gap: 10px;
+}
+
+.theme-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--card-bg);
+    transition: transform 0.3s;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    flex-grow: 1;
+}
+
+.language-select {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.language-select h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+.language-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.lang-btn {
+    background-color: var(--button-color);
+    color: #ffffff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.lang-btn:hover {
+    opacity: 0.9;
+}
+
+.examples {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px 0;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.example-game {
+    text-align: center;
+}
+
+.word-example {
+    display: flex;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.letter {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 4px;
+    color: white;
+}
+
+.correct {
+    background-color: var(--correct-color);
+}
+
+.present {
+    background-color: var(--present-color);
+}
+
+.absent {
+    background-color: var(--gray-text);
+}
+
+.rules-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.share-request {
+    color: var(--info-text);
+    text-align: center;
+    margin: 40px 0;
+    line-height: 1.6;
+}
+
+footer {
+    background-color: var(--footer-bg);
+    color: var(--text-color);
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+}
+
+@media (max-width: 768px) {
+    .language-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .examples {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .letter {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+.btn-write {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: var(--button-color);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 15px;
+    transition: opacity 0.3s;
+}
+
+.btn-write:hover {
+    opacity: 0.9;
+}

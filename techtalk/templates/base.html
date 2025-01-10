@@ -4,14 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}TechTalk{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% if request.endpoint == 'index' %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/home_page.css') }}">
+    {% elif request.endpoint == 'store' %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/store.css') }}">
+    {% elif request.endpoint == 'game' %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+    {% endif %}
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <div class="logo-title">
-                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="TechTalk Logo" class="logo">
-                <h1>TechTalk</h1>
+                <a href="/" class="home-link">
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="TechTalk Logo" class="logo">
+                    <h1>TechTalk</h1>
+                </a>
             </div>
             <div class="user-stats">
                 <div class="streak">
@@ -22,17 +30,13 @@
                     <span class="crystal">💎</span>
                     <span class="crystal-count">100</span>
                 </div>
-                <a href="#" class="shop-link">
-                    <img src="{{ url_for('static', filename='images/shop.jpg') }}" alt="Shop" class="shop-icon">
-                    <span>Магазин</span>
-                </a>
+                <a href="/store" class="shop-link">Магазин</a>
             </div>
             <div class="theme-switcher">
                 <button class="theme-btn light-theme">☀️</button>
                 <button class="theme-btn dark-theme">🌙</button>
             </div>
         </div>
-        
     </header>
     
     <main>
