@@ -7,7 +7,6 @@
     --dark-card: #1a1a1b;
 }
 
-/* Темы */
 [data-theme="light"] {
     --background-color: #ffffff;
     --text-color: #000000;
@@ -26,25 +25,6 @@
     --info-text: var(--gray-text);
 }
 
-[data-theme="green"] {
-    --background-color: var(--correct-color);
-    --text-color: #ffffff;
-    --card-bg: var(--present-color);
-    --button-color: var(--present-color);
-    --footer-bg: var(--correct-color);
-    --info-text: #ffffff;
-}
-
-[data-theme="yellow"] {
-    --background-color: var(--present-color);
-    --text-color: #000000;
-    --card-bg: var(--correct-color);
-    --button-color: var(--correct-color);
-    --footer-bg: var(--present-color);
-    --info-text: #000000;
-}
-
-/* Основные стили */
 body {
     background-color: var(--background-color);
     color: var(--text-color);
@@ -56,7 +36,6 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Хедер */
 .header {
     background-color: var(--background-color);
     padding: 1rem;
@@ -101,9 +80,8 @@ body {
     transform: scale(1.1);
 }
 
-/* Основной контент */
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 2rem;
     flex-grow: 1;
@@ -143,13 +121,12 @@ body {
     opacity: 0.9;
 }
 
-/* Примеры игры */
 .examples {
     display: flex;
     justify-content: space-around;
     margin: 40px 0;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px;
 }
 
 .example-game {
@@ -159,7 +136,7 @@ body {
 .word-example {
     display: flex;
     gap: 5px;
-    margin-top: 10px;
+    margin: 10px 0;
 }
 
 .letter {
@@ -171,19 +148,31 @@ body {
     font-size: 1.5rem;
     font-weight: bold;
     border-radius: 4px;
+    color: white;
 }
 
-/* Карточки */
+.correct {
+    background-color: var(--correct-color);
+}
+
+.present {
+    background-color: var(--present-color);
+}
+
+.absent {
+    background-color: var(--gray-text);
+}
+
 .rules-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
     margin: 40px 0;
 }
 
 .card {
     background-color: var(--card-bg);
-    padding: 20px;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
@@ -195,6 +184,12 @@ body {
 
 .card h3 {
     margin-bottom: 15px;
+    color: var(--text-color);
+    font-size: 1.3rem;
+}
+
+.card p {
+    line-height: 1.6;
     color: var(--text-color);
 }
 
@@ -213,14 +208,13 @@ body {
     opacity: 0.9;
 }
 
-/* Информационный текст */
 .share-request {
     color: var(--info-text);
     text-align: center;
     margin: 40px 0;
+    line-height: 1.6;
 }
 
-/* Футер */
 footer {
     background-color: var(--footer-bg);
     color: var(--text-color);
@@ -230,7 +224,228 @@ footer {
     transition: background-color 0.3s;
 }
 
-/* Адаптивность */
+.user-stats {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.streak, .crystals {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+}
+
+.shop-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.shop-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Стили для магазина */
+.shop-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.shop-item {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.shop-item img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.shop-item .price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.buy-btn {
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Стили модального окна магазина */
+.shop-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.shop-content {
+    background: var(--background-color);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.shop-content h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+.shop-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.shop-item {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.shop-item h3 {
+    color: var(--text-color);
+    margin: 0;
+}
+
+.shop-item p {
+    color: var(--text-color);
+    margin: 0;
+    flex-grow: 1;
+}
+
+.shop-item .price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.buy-btn {
+    background: var(--button-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.3s;
+}
+
+.buy-btn:hover {
+    opacity: 0.9;
+}
+
+.close-shop {
+    display: block;
+    margin: 0 auto;
+    background: var(--button-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.3s;
+}
+
+.close-shop:hover {
+    opacity: 0.9;
+}
+
+/* Анимация появления модального окна */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.shop-modal {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Стили для элементов статистики в хедере */
+.user-stats {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-right: 20px;
+}
+
+.streak, .crystals {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.fire, .crystal {
+    font-size: 1.3rem;
+}
+
+.crystal {
+    color: #00b4ff;
+}
+
+.shop-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 8px;
+    background: var(--card-bg);
+    transition: transform 0.2s;
+}
+
+.shop-link:hover {
+    transform: translateY(-2px);
+}
+
+.shop-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
@@ -248,5 +463,11 @@ footer {
     .examples {
         flex-direction: column;
         align-items: center;
+    }
+
+    .letter {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
     }
 }

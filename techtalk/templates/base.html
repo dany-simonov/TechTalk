@@ -13,13 +13,26 @@
                 <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="TechTalk Logo" class="logo">
                 <h1>TechTalk</h1>
             </div>
+            <div class="user-stats">
+                <div class="streak">
+                    <span class="fire">🔥</span>
+                    <span class="streak-count">5</span>
+                </div>
+                <div class="crystals">
+                    <span class="crystal">💎</span>
+                    <span class="crystal-count">100</span>
+                </div>
+                <a href="#" class="shop-link">
+                    <img src="{{ url_for('static', filename='images/shop.jpg') }}" alt="Shop" class="shop-icon">
+                    <span>Магазин</span>
+                </a>
+            </div>
             <div class="theme-switcher">
                 <button class="theme-btn light-theme">☀️</button>
                 <button class="theme-btn dark-theme">🌙</button>
-                <button class="theme-btn green-theme">🌿</button>
-                <button class="theme-btn yellow-theme">⭐</button>
             </div>
         </div>
+        
     </header>
     
     <main>
