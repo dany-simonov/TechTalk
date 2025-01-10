@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}TechTalk - Игра{% endblock %}
+
+{% block content %}
+<div class="game-container">
+    <div id="game-board">
+        {% for row in range(6) %}
+        <div class="word-row">
+            {% for col in range(5) %}
+            <div class="letter-box"></div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="keyboard-ru" class="keyboard">
+        <div class="keyboard-row">
+            <button class="key">Й</button>
+            <button class="key">Ц</button>
+            <button class="key">У</button>
+            <button class="key">К</button>
+            <button class="key">Е</button>
+            <button class="key">Н</button>
+            <button class="key">Г</button>
+            <button class="key">Ш</button>
+            <button class="key">Щ</button>
+            <button class="key">З</button>
+            <button class="key">Х</button>
+            <button class="key">Ъ</button>
+        </div>
+        <div class="keyboard-row">
+            <button class="key">Ф</button>
+            <button class="key">Ы</button>
+            <button class="key">В</button>
+            <button class="key">А</button>
+            <button class="key">П</button>
+            <button class="key">Р</button>
+            <button class="key">О</button>
+            <button class="key">Л</button>
+            <button class="key">Д</button>
+            <button class="key">Ж</button>
+            <button class="key">Э</button>
+        </div>
+        <div class="keyboard-row">
+            <button class="key special">ВВОД</button>
+            <button class="key">Я</button>
+            <button class="key">Ч</button>
+            <button class="key">С</button>
+            <button class="key">М</button>
+            <button class="key">И</button>
+            <button class="key">Т</button>
+            <button class="key">Ь</button>
+            <button class="key">Б</button>
+            <button class="key">Ю</button>
+            <button class="key special">⌫</button>
+        </div>
+    </div>
+
+    <div id="keyboard-en" class="keyboard hidden">
+        <div class="keyboard-row">
+            <button class="key">Q</button>
+            <button class="key">W</button>
+            <button class="key">E</button>
+            <button class="key">R</button>
+            <button class="key">T</button>
+            <button class="key">Y</button>
+            <button class="key">U</button>
+            <button class="key">I</button>
+            <button class="key">O</button>
+            <button class="key">P</button>
+        </div>
+        <div class="keyboard-row">
+            <button class="key">A</button>
+            <button class="key">S</button>
+            <button class="key">D</button>
+            <button class="key">F</button>
+            <button class="key">G</button>
+            <button class="key">H</button>
+            <button class="key">J</button>
+            <button class="key">K</button>
+            <button class="key">L</button>
+        </div>
+        <div class="keyboard-row">
+            <button class="key special">ENTER</button>
+            <button class="key">Z</button>
+            <button class="key">X</button>
+            <button class="key">C</button>
+            <button class="key">V</button>
+            <button class="key">B</button>
+            <button class="key">N</button>
+            <button class="key">M</button>
+            <button class="key special">⌫</button>
+        </div>
+    </div>
+
+    <div id="message"></div>
+    
+    <div class="controls">
+        <button id="new-game" class="btn">Новая игра</button>
+        <button id="switch-lang" class="btn">EN/RU</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endblock %}

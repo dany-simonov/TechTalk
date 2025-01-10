@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="language-select">
+        <h2>Выберите язык</h2>
+        <div class="language-buttons">
+            <a href="{{ url_for('game', lang='ru') }}" class="lang-btn">Русский</a>
+            <a href="{{ url_for('game', lang='en') }}" class="lang-btn">English</a>
+        </div>
+    </div>
+
+    <div class="examples">
+        <div class="example-game">
+            <h3>Пример игры (Русский):</h3>
+            <div class="word-example">
+                <div class="letter correct">А</div>
+                <div class="letter present">Д</div>
+                <div class="letter absent">М</div>
+                <div class="letter correct">И</div>
+                <div class="letter correct">Н</div>
+            </div>
+        </div>
+        <div class="example-game">
+            <h3>Example game (English):</h3>
+            <div class="word-example">
+                <div class="letter correct">A</div>
+                <div class="letter present">D</div>
+                <div class="letter absent">M</div>
+                <div class="letter correct">I</div>
+                <div class="letter correct">N</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rules-cards">
+        <div class="card">
+            <h3>Каковы правила игры TechTalk?</h3>
+            <p>Правила игры TechTalk довольно просты. Вам нужно угадать слово за 6 попыток. Для этого нужно по очереди вводить разные слова и получать подсказки.</p>
+            <a href="mailto:studysphereru@gmail.com" class="btn-write">Написать</a>
+        </div>
+        <div class="card">
+            <h3>Что означает сообщение "Недопустимое слово"?</h3>
+            <p>Если вы видите такое сообщение, значит введенного вами слова нет в нашем словаре. Скорее всего это означает, что данное слово либо не существует, либо не соответствует правилам игры.</p>
+            <a href="mailto:studysphereru@gmail.com" class="btn-write">Написать</a>
+        </div>
+        <div class="card">
+            <h3>Вы использовали не настоящее слово?</h3>
+            <p>Если вам кажется, что в наш словарь попало слово, которого нет в словаре, то сообщите нам об этом, и мы рассмотрим возможность внесения изменений.</p>
+            <a href="mailto:studysphereru@gmail.com" class="btn-write">Написать</a>
+        </div>
+    </div>
+
+    <div class="share-request">
+        <p>Расскажите о нас другим</p>
+        <p>Мы очень усердно работали над созданием этого веб-сайта и надеемся, что он вам понравится. Это бесплатно и всегда будет таковым.</p>
+    </div>
+</div>
+{% endblock %}
