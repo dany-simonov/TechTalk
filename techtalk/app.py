@@ -9,7 +9,53 @@ db = Database()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    streak = session.get('streak', 0)
+    crystals = session.get('crystals', 0)
+    current_user = {
+        'nickname': session.get('nickname', 'guest'),
+        'id': session.get('user_id', None)
+    }
+    return render_template('index.html', 
+                         streak=streak, 
+                         crystals=crystals,
+                         current_user=current_user)
+
+@app.route('/profile/<nickname>')
+def profile(nickname):
+    user = db.get_user_by_nickname(nickname)
+    current_user = {
+        'nickname': session.get('nickname', 'guest'),
+        'id': session.get('user_id', None)
+    }
+    if nickname == 'guest':
+        return render_template('profile.html', 
+                             user={'nickname': 'guest', 'balance': 0}, 
+                             inventory=[], 
+                             current_user=current_user)
+    if not user:
+        return redirect('/')
+    inventory = db.get_user_inventory(user['id'])
+    return render_template('profile.html', user=user, inventory=inventory, current_user=current_user)
+
+@app.route('/inventory')
+def inventory():
+    current_user = {
+        'nickname': session.get('nickname', 'guest'),
+        'id': session.get('user_id', None)
+    }
+    if current_user['nickname'] == 'guest':
+        return render_template('inventory.html', items=[], current_user=current_user)
+    items = db.get_user_inventory(current_user['id'])
+    return render_template('inventory.html', items=items, current_user=current_user)
+
+
+@app.route('/store')
+def store():
+    current_user = {
+        'nickname': session.get('nickname', 'guest'),
+        'id': session.get('user_id', None)
+    }
+    return render_template('store.html', current_user=current_user)
 
 @app.route('/game')
 def game():
@@ -25,7 +71,11 @@ def game():
         return redirect('/')
         
     session['word'] = word_pair[0].upper()
-    return render_template('game.html', lang=lang)
+    current_user = {
+        'nickname': session.get('nickname', 'guest'),
+        'id': session.get('user_id', None)
+    }
+    return render_template('game.html', lang=lang, current_user=current_user)
 
 @app.route('/check', methods=['POST'])
 def check_word():
@@ -63,10 +113,6 @@ def new_game():
     session['attempts'] = 0
     
     return jsonify({'success': True})
-
-@app.route('/store')
-def store():
-    return render_template('store.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

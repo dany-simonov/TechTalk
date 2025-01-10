@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}TechTalk{% endblock %}</title>
-    {% if request.endpoint == 'index' %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/home_page.css') }}">
-    {% elif request.endpoint == 'store' %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home_page.css') }}">
+    {% if request.endpoint == 'store' %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/store.css') }}">
     {% elif request.endpoint == 'game' %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
     {% endif %}
+    {% block styles %}{% endblock %}
 </head>
 <body>
     <header class="header">
@@ -24,21 +24,23 @@
             <div class="user-stats">
                 <div class="streak">
                     <span class="fire">🔥</span>
-                    <span class="streak-count">5</span>
+                    <span>{{ streak }}</span>
                 </div>
                 <div class="crystals">
                     <span class="crystal">💎</span>
-                    <span class="crystal-count">100</span>
+                    <span>{{ crystals }}</span>
                 </div>
-                <a href="/store" class="shop-link">Магазин</a>
-            </div>
-            <div class="theme-switcher">
-                <button class="theme-btn light-theme">☀️</button>
-                <button class="theme-btn dark-theme">🌙</button>
+                <a href="{{ url_for('profile', nickname=current_user['nickname']) }}" class="profile-link">Профиль</a>
+                <a href="{{ url_for('inventory') }}" class="inventory-link">Инвентарь</a>
+                <a href="{{ url_for('store') }}" class="shop-link">Магазин</a>
+                <div class="theme-switcher">
+                    <button class="theme-btn" data-theme="light">☀️</button>
+                    <button class="theme-btn" data-theme="dark">🌙</button>
+                </div>
             </div>
         </div>
     </header>
-    
+   
     <main>
         {% block content %}{% endblock %}
     </main>
@@ -47,7 +49,18 @@
         <p>© 2024 TechTalk все права защищены</p>
     </footer>
 
-    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    <script>
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.documentElement.setAttribute('data-theme', btn.dataset.theme);
+            localStorage.setItem('theme', btn.dataset.theme);
+        });
+    });
+
+    // Восстановление темы при загрузке
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
     {% block scripts %}{% endblock %}
 </body>
 </html>

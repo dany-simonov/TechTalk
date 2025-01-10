@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="profile-picture">
+            <img src="{{ url_for('static', filename='uploads/' + user.profile_picture) if user.profile_picture else url_for('static', filename='images/default_avatar.png') }}" alt="Фото профиля">
+            {% if session.user_id == user.id %}
+            <form id="picture-form" class="picture-upload">
+                <input type="file" name="picture" accept="image/jpeg,image/png">
+                <button type="submit">Обновить фото</button>
+            </form>
+            {% endif %}
+        </div>
+        
+        <div class="profile-info">
+            <h2>{{ user.nickname }}</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="crystal">💎</span>
+                    <span>{{ user.balance }}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="friends">👥</span>
+                    <span>{{ friends|length }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inventory-section">
+        <h3>Инвентарь</h3>
+        <div class="inventory-grid">
+            {% for item in inventory %}
+            <div class="inventory-item">
+                <img src="{{ url_for('static', filename='images/items/' + item.icon) }}" alt="{{ item.name }}">
+                <h4>{{ item.name }}</h4>
+                <p>{{ item.description }}</p>
+                {% if item.type == 'usable' %}
+                <button class="use-item-btn" data-item-id="{{ item.id }}">Использовать</button>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
