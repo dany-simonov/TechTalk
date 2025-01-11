@@ -1,11 +1,14 @@
 from flask import Flask, render_template, request, jsonify, session, redirect
 from database import Database
 from config import Config
+from import_words import import_words_from_site
 
 app = Flask(__name__)
 app.config.from_object(Config)
 app.config['SECRET_KEY'] = '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'
+
 db = Database()
+import_words_from_site()
 
 @app.route('/')
 def index():
@@ -76,22 +79,38 @@ def store():
 @app.route('/game')
 def game():
     lang = request.args.get('lang', 'ru')
-    if lang not in app.config['LANGUAGES']:
-        return redirect('/')
+    return render_template(f'pregame_{lang}.html', current_user={'nickname': 'Player'})
+
+@app.route('/start_game')
+def start_game():
+    lang = request.args.get('lang', 'ru')
+    length = request.args.get('length', 5, type=int)
+    theme = request.args.get('theme', 'none')
     
-    session['language'] = lang
-    session['attempts'] = 0
-    word_pair = db.get_random_word(lang, app.config['GAME_WORD_LENGTH'])
-    
-    if not word_pair:
+    word = db.get_random_word(lang, length, theme)
+    if not word:
         return redirect('/')
         
-    session['word'] = word_pair[0].upper()
-    current_user = {
-        'nickname': session.get('nickname', 'guest'),
-        'id': session.get('user_id', None)
-    }
-    return render_template('game.html', lang=lang, current_user=current_user)
+    session['game_word'] = word[0].upper()
+    session['game_lang'] = lang
+    
+    if lang == 'ru':
+        return render_template('game_ru.html', current_user={'nickname': 'Player'})
+    else:
+        return render_template('game_en.html', current_user={'nickname': 'Player'})
+
+
+
+@app.route('/get_word')
+def get_word():
+    length = request.args.get('length', 5, type=int)
+    lang = request.args.get('lang', 'ru')
+    word = db.get_random_word(lang, length)
+    
+    if word:
+        session['game_word'] = word[0].upper()
+        return jsonify({'word': word[0].upper()})
+    return jsonify({'error': 'Word not found'})
 
 @app.route('/check', methods=['POST'])
 def check_word():

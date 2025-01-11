@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pregame.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="pregame-container">
+    <div class="settings-card">
+        <h3>Выберите длину слова:</h3>
+        <select id="word-length" class="pregame-select" onchange="saveLength(this.value)">
+            <option value="4">4 буквы</option>
+            <option value="5" selected>5 букв</option>
+            <option value="6">6 букв</option>
+            <option value="7">7 букв</option>
+            <option value="8">8 букв</option>
+        </select>
+        <button class="save-btn">Сохранить</button>
+    </div>
+
+    <div class="settings-card">
+        <h3>Выберите тему:</h3>
+        <select id="word-theme" class="pregame-select" onchange="saveTheme(this.value)">
+            <option value="none">Без темы</option>
+            <option value="economics">Экономика</option>
+            <option value="business">Бизнес</option>
+            <option value="it">IT</option>
+        </select>
+        <button class="save-btn">Сохранить</button>
+    </div>
+
+    <button class="start-game-btn" onclick="startGame()">Начать игру</button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const currentLanguage = 'ru';
+</script>
+<script src="{{ url_for('static', filename='js/pregame.js') }}"></script>
+{% endblock %}
