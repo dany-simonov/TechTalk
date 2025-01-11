@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.game-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.game-button {
+    padding: 20px 40px;
+    font-size: 24px;
+    background: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.game-button:hover {
+    transform: scale(1.05);
+    background: #45a049;
+}
