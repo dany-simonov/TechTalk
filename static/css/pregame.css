@@ -57,3 +57,9 @@
     font-weight: bold;
     text-transform: uppercase;
 }
+
+.save-btn:hover, .start-game-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+    transition: all 0.2s ease;
+}

@@ -20,6 +20,6 @@ function highlightSaveButton(button) {
     }, 500);
 }
 
-function startGame(lang) {
-    window.location.href = `game_${lang}.html?length=${gameSettings.length}&theme=${gameSettings.theme}`;
+function startGame() {
+    window.location.href = `/game?lang=${currentLanguage}&length=${gameSettings.length}&theme=${gameSettings.theme}`;
 }

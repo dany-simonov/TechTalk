@@ -1,19 +1,79 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>TechTalk - Game</title>
-    <link rel="stylesheet" href="static/css/game.css">
-</head>
-<body>
-    <nav>
-        <a href="index.html">
-            <img src="static/images/logo.svg" alt="Logo">
-        </a>
-    </nav>
-    <div id="game-container">
-        <div id="game-board"></div>
-        <div id="keyboard"></div>
+{% extends "base.html" %}
+
+{% block title %}TechTalk - Game{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="game-container">
+    <div class="word-length-selector">
+        <label for="word-length">Select word length:</label>
+        <select id="word-length" onchange="changeWordLength(this.value)">
+            <option value="4">4 letters</option>
+            <option value="5" selected>5 letters</option>
+            <option value="6">6 letters</option>
+            <option value="7">7 letters</option>
+            <option value="8">8 letters</option>
+        </select>
     </div>
-    <script src="static/js/game.js"></script>
-</body>
-</html>
+
+    <div id="game-board">
+        {% for row in range(6) %}
+        <div class="word-row">
+            {% for col in range(5) %}
+            <div class="letter-box"></div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="keyboard-en" class="keyboard">
+        <div class="keyboard-row">
+            <button class="key">Q</button>
+            <button class="key">W</button>
+            <button class="key">E</button>
+            <button class="key">R</button>
+            <button class="key">T</button>
+            <button class="key">Y</button>
+            <button class="key">U</button>
+            <button class="key">I</button>
+            <button class="key">O</button>
+            <button class="key">P</button>
+        </div>
+        <div class="keyboard-row">
+            <button class="key">A</button>
+            <button class="key">S</button>
+            <button class="key">D</button>
+            <button class="key">F</button>
+            <button class="key">G</button>
+            <button class="key">H</button>
+            <button class="key">J</button>
+            <button class="key">K</button>
+            <button class="key">L</button>
+        </div>
+        <div class="keyboard-row">
+            <button class="key special">ENTER</button>
+            <button class="key">Z</button>
+            <button class="key">X</button>
+            <button class="key">C</button>
+            <button class="key">V</button>
+            <button class="key">B</button>
+            <button class="key">N</button>
+            <button class="key">M</button>
+            <button class="key special">⌫</button>
+        </div>
+    </div>
+
+    <div id="message"></div>
+    
+    <div class="controls">
+        <button id="new-game" class="btn">New Game</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endblock %}

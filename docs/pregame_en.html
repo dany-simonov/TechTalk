@@ -1,41 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>TechTalk - Game Settings</title>
-    <link rel="stylesheet" href="static/css/pregame.css">
-</head>
-<body>
-    <nav>
-        <a href="index.html">
-            <img src="static/images/logo.svg" alt="Logo">
-        </a>
-    </nav>
-    <div class="pregame-container">
-        <div class="settings-card">
-            <h3>Select word length:</h3>
-            <select id="word-length" class="pregame-select" onchange="saveLength(this.value)">
-                <option value="4">4 letters</option>
-                <option value="5" selected>5 letters</option>
-                <option value="6">6 letters</option>
-                <option value="7">7 letters</option>
-                <option value="8">8 letters</option>
-            </select>
-            <button class="save-btn">Save</button>
-        </div>
+{% extends "base.html" %}
 
-        <div class="settings-card">
-            <h3>Select theme:</h3>
-            <select id="word-theme" class="pregame-select" onchange="saveTheme(this.value)">
-                <option value="none">No theme</option>
-                <option value="economics">Economics</option>
-                <option value="business">Business</option>
-                <option value="it">IT</option>
-            </select>
-            <button class="save-btn">Save</button>
-        </div>
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pregame.css') }}">
+{% endblock %}
 
-        <button class="start-game-btn" onclick="startGame('en')">Start Game</button>
+{% block content %}
+<div class="pregame-container">
+    <div class="settings-card">
+        <h3>Select word length:</h3>
+        <select id="word-length" class="pregame-select" onchange="saveLength(this.value)">
+            <option value="4">4 letters</option>
+            <option value="5" selected>5 letters</option>
+            <option value="6">6 letters</option>
+            <option value="7">7 letters</option>
+            <option value="8">8 letters</option>
+        </select>
+        <button class="save-btn">Save</button>
     </div>
-    <script src="static/js/pregame.js"></script>
-</body>
-</html>
+
+    <div class="settings-card">
+        <h3>Select theme:</h3>
+        <select id="word-theme" class="pregame-select" onchange="saveTheme(this.value)">
+            <option value="none">No theme</option>
+            <option value="economics">Economics</option>
+            <option value="business">Business</option>
+            <option value="it">IT</option>
+        </select>
+        <button class="save-btn">Save</button>
+    </div>
+
+    <button class="start-game-btn" onclick="startGame()">Start Game</button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const currentLanguage = 'en';
+</script>
+<script src="{{ url_for('static', filename='js/pregame.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TechTalk{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home_page.css') }}">
+    {% if request.endpoint == 'store' %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/store.css') }}">
+    {% endif %}
+    {% if request.endpoint == 'profile' %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    {% endif %}
+    {% if request.endpoint == 'game' %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+    {% endif %}
+    {% block styles %}{% endblock %}
+    </head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-title">
+                <a href="/" class="home-link">
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="TechTalk Logo" class="logo">
+                    <h1>TechTalk</h1>
+                </a>
+            </div>
+            <div class="user-stats">
+                <div class="streak">
+                    <span class="fire">🔥</span>
+                    <span>{{ streak }}</span>
+                </div>
+                <div class="crystals">
+                    <span class="crystal">💎</span>
+                    <span>{{ crystals }}</span>
+                </div>
+                <a href="{{ url_for('profile', nickname=current_user['nickname']) }}" class="profile-link">Профиль</a>
+                <a href="{{ url_for('inventory') }}" class="inventory-link">Инвентарь</a>
+                <a href="{{ url_for('store') }}" class="shop-link">Магазин</a>
+                <div class="theme-switcher">
+                    <button class="theme-btn" data-theme="light">☀️</button>
+                    <button class="theme-btn" data-theme="dark">🌙</button>
+                </div>
+            </div>
+        </div>
+    </header>
+   
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2024 TechTalk все права защищены</p>
+    </footer>
+
+    <script>
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.documentElement.setAttribute('data-theme', btn.dataset.theme);
+            localStorage.setItem('theme', btn.dataset.theme);
+        });
+    });
+
+    // Восстановление темы при загрузке
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

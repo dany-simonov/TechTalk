@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Магазин - TechTalk{% endblock %}
+
+{% block content %}
+<div class="store-container">
+    <h1 class="store-title">Магазин</h1>
+    <div class="store-slider">
+        <button class="slider-arrow left"></button>
+        <div class="store-items">
+            <div class="store-item">
+                <div class="item-image">
+                    <img src="{{ url_for('static', filename='images/poison_small.webp') }}" alt="Малое зелье">
+                </div>
+                <h3>Малое зелье</h3>
+                <p>Восстанавливает серию побед</p>
+                <div class="price">
+                    <span>50</span>
+                    <span class="crystal">💎</span>
+                </div>
+                <button class="buy-btn">Купить</button>
+            </div>
+            
+            <div class="store-item">
+                <div class="item-image">
+                    <img src="{{ url_for('static', filename='images/poison_big.jpg') }}" alt="Большое зелье">
+                </div>
+                <h3>Большое зелье</h3>
+                <p>Восстанавливает присутствие за пропущенный день</p>
+                <div class="price">
+                    <span>150</span>
+                    <span class="crystal">💎</span>
+                </div>
+                <button class="buy-btn">Купить</button>
+            </div>
+            
+            <div class="store-item">
+                <div class="item-image">
+                    <img src="{{ url_for('static', filename='images/double.webp') }}" alt="Удвоитель">
+                </div>
+                <h3>Удвоитель кристаллов</h3>
+                <p>Удваивает получение кристаллов на 24 часа</p>
+                <div class="price">
+                    <span>100</span>
+                    <span class="crystal">💎</span>
+                </div>
+                <button class="buy-btn">Купить</button>
+            </div>
+            
+            <div class="store-item coming-soon">
+                <div class="item-image">
+                    <img src="{{ url_for('static', filename='images/future_poison.png') }}" alt="Будущие зелья">
+                </div>
+                <h3>Скоро</h3>
+                <p>Новые предметы в разработке</p>
+            </div>
+        </div>
+        <button class="slider-arrow right"></button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/store.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Профиль - {{ user.nickname }}{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-content">
+        <div class="avatar-section">
+            <img src="{{ url_for('static', filename='images/dino.jpg') }}" alt="Avatar" class="profile-avatar" id="avatar-preview">
+            <div class="avatar-controls">
+                <input type="file" id="avatar-input" accept="image/*" class="btn btn-green">
+                <button class="btn btn-green">Обновить фото</button>
+            </div>
+        </div>
+
+        <div class="user-info">
+            <div class="credentials">
+                <p>Логин: {{ user.username }}</p>
+                <p>Пароль: ********</p>
+            </div>
+
+            <div class="nickname-section">
+                <input type="text" placeholder="@nickname" value="{{ user.nickname }}">
+                <button class="btn btn-green">Сохранить</button>
+            </div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="fire">🔥</span>
+                    <span>{{ streak }} дней вы в ударе</span>
+                </div>
+                <div class="stat-item">
+                    <span class="crystal">💎</span>
+                    <span>{{ crystals }}</span>
+                </div>
+                <div class="friends-section">
+                    <div class="friends-count">
+                        <span>👥 {{ friends_count }} друзей</span>
+                    </div>
+                    <div class="add-friend">
+                        <input type="text" placeholder="Никнейм друга">
+                        <button class="btn btn-green">Найти друга</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

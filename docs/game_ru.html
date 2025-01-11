@@ -1,19 +1,85 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>TechTalk - Игра</title>
-    <link rel="stylesheet" href="static/css/game.css">
-</head>
-<body>
-    <nav>
-        <a href="index.html">
-            <img src="static/images/logo.svg" alt="Logo">
-        </a>
-    </nav>
-    <div id="game-container">
-        <div id="game-board"></div>
-        <div id="keyboard"></div>
+{% extends "base.html" %}
+
+{% block title %}TechTalk - Игра{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="game-container">
+    <div class="word-length-selector">
+        <label for="word-length">Выберите длину слова:</label>
+        <select id="word-length" onchange="changeWordLength(this.value)">
+            <option value="4">4 буквы</option>
+            <option value="5" selected>5 букв</option>
+            <option value="6">6 букв</option>
+            <option value="7">7 букв</option>
+            <option value="8">8 букв</option>
+        </select>
     </div>
-    <script src="static/js/game.js"></script>
-</body>
-</html>
+    
+    <div id="game-board">
+        {% for row in range(6) %}
+        <div class="word-row">
+            {% for col in range(5) %}
+            <div class="letter-box"></div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="keyboard-ru" class="keyboard">
+        <div class="keyboard-row">
+            <button class="key">Й</button>
+            <button class="key">Ц</button>
+            <button class="key">У</button>
+            <button class="key">К</button>
+            <button class="key">Е</button>
+            <button class="key">Н</button>
+            <button class="key">Г</button>
+            <button class="key">Ш</button>
+            <button class="key">Щ</button>
+            <button class="key">З</button>
+            <button class="key">Х</button>
+            <button class="key">Ъ</button>
+        </div>
+        <div class="keyboard-row">
+            <button class="key">Ф</button>
+            <button class="key">Ы</button>
+            <button class="key">В</button>
+            <button class="key">А</button>
+            <button class="key">П</button>
+            <button class="key">Р</button>
+            <button class="key">О</button>
+            <button class="key">Л</button>
+            <button class="key">Д</button>
+            <button class="key">Ж</button>
+            <button class="key">Э</button>
+        </div>
+        <div class="keyboard-row">
+            <button class="key special">ВВОД</button>
+            <button class="key">Я</button>
+            <button class="key">Ч</button>
+            <button class="key">С</button>
+            <button class="key">М</button>
+            <button class="key">И</button>
+            <button class="key">Т</button>
+            <button class="key">Ь</button>
+            <button class="key">Б</button>
+            <button class="key">Ю</button>
+            <button class="key special">⌫</button>
+        </div>
+    </div>
+
+    <div id="message"></div>
+    
+    <div class="controls">
+        <button id="new-game" class="btn">Новая игра</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endblock %}

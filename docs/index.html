@@ -1,20 +1,119 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>TechTalk - Learn Languages</title>
-    <link rel="stylesheet" href="static/css/home_page.css">
-</head>
-<body>
-    <nav>
-        <a href="index.html">
-            <img src="static/images/logo.svg" alt="Logo">
-        </a>
-    </nav>
-    <div class="container">
-        <div class="game-buttons">
-            <a href="pregame_ru.html" class="game-button">Играть на русском</a>
-            <a href="pregame_en.html" class="game-button">Play in English</a>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="language-select">
+        <h2>Выберите язык</h2>
+        <div class="language-selection">
+            <a href="{{ url_for('game', lang='ru') }}" class="language-button">Русский</a>
+            <a href="{{ url_for('game', lang='en') }}" class="language-button">English</a>
+        </div>                    
+    </div>
+
+    <div class="examples">
+        <div class="example-game">
+            <h3>Пример игры (Русский):</h3>
+            <div class="word-example">
+                <div class="letter absent">С</div>
+                <div class="letter absent">Т</div>
+                <div class="letter absent">Р</div>
+                <div class="letter correct">И</div>
+                <div class="letter absent">М</div>
+            </div>
+            <div class="word-example">
+                <div class="letter absent">В</div>
+                <div class="letter present">И</div>
+                <div class="letter absent">Р</div>
+                <div class="letter absent">У</div>
+                <div class="letter absent">С</div>
+            </div>
+            <div class="word-example">
+                <div class="letter correct">А</div>
+                <div class="letter absent">Л</div>
+                <div class="letter absent">Ь</div>
+                <div class="letter absent">Ф</div>
+                <div class="letter absent">А</div>
+            </div>
+            <div class="word-example">
+                <div class="letter absent">Б</div>
+                <div class="letter present">А</div>
+                <div class="letter present">Н</div>
+                <div class="letter present">Д</div>
+                <div class="letter absent">Л</div>
+            </div>
+            <div class="word-example">
+                <div class="letter correct">А</div>
+                <div class="letter correct">Д</div>
+                <div class="letter correct">М</div>
+                <div class="letter correct">И</div>
+                <div class="letter correct">Н</div>
+            </div>
+        </div>
+        <div class="example-game">
+            <h3>Example game (English):</h3>
+            <div class="word-example">
+                <div class="letter present">T</div>
+                <div class="letter present">R</div>
+                <div class="letter correct">A</div>
+                <div class="letter present">S</div>
+                <div class="letter absent">H</div>
+            </div>
+            <div class="word-example">
+                <div class="letter absent">P</div>
+                <div class="letter absent">L</div>
+                <div class="letter correct">A</div>
+                <div class="letter absent">N</div>
+                <div class="letter correct">T</div>
+            </div>
+            <div class="word-example">
+                <div class="letter correct">S</div>
+                <div class="letter absent">H</div>
+                <div class="letter absent">O</div>
+                <div class="letter correct">R</div>
+                <div class="letter correct">T</div>
+            </div>
+            <div class="word-example">
+                <div class="letter correct">S</div>
+                <div class="letter correct">T</div>
+                <div class="letter correct">A</div>
+                <div class="letter absent">N</div>
+                <div class="letter absent">D</div>
+            </div>
+            <div class="word-example">
+                <div class="letter correct">S</div>
+                <div class="letter correct">T</div>
+                <div class="letter correct">A</div>
+                <div class="letter correct">R</div>
+                <div class="letter correct">T</div>
+            </div>
         </div>
     </div>
-</body>
-</html>
+    
+
+    <div class="rules-cards">
+        <div class="card">
+            <h3>Каковы правила игры TechTalk?</h3>
+            <p>Правила игры TechTalk довольно просты. Вам нужно угадать слово за 6 попыток. Для этого нужно по очереди вводить разные слова и получать подсказки.</p>
+        </div>
+        <div class="card">
+            <h3>Что означает сообщение "Недопустимое слово"?</h3>
+            <p>Если вы видите такое сообщение, значит введенного вами слова нет в нашем словаре. Скорее всего это означает, что данное слово либо не существует, либо не соответствует правилам игры.</p>
+            <a href="mailto:studysphereru@gmail.com" class="btn-write">Написать</a>
+        </div>
+        <div class="card">
+            <h3>Вы использовали не настоящее слово?</h3>
+            <p>Если вам кажется, что в наш словарь попало слово, которого нет в словаре, то сообщите нам об этом, и мы рассмотрим возможность внесения изменений.</p>
+            <a href="mailto:studysphereru@gmail.com" class="btn-write">Написать</a>
+        </div>
+        <div class="card">
+            <h3>Есть ли более сложные версии игры?</h3>
+            <p>Да, мы предусмотрели, что стандартный режим может показаться вам слишком простым. На такой случай у нас есть TechTalk hard. Вам придется попотеть! (В разработке)</p>
+        </div>        
+    </div>
+
+    <div class="share-request">
+        <p>Расскажите о нас другим</p>
+        <p>Мы очень усердно работали над созданием этого веб-сайта и надеемся, что он вам понравится. Это бесплатно и всегда будет таковым.</p>
+    </div>
+</div>
+{% endblock %}
